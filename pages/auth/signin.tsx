@@ -14,7 +14,7 @@ const SignIn = () => {
         {error && <p className="text-red-500 text-center mb-4">Error: {error}</p>}
         <button
           onClick={() => signIn('google')}
-          className="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition duration-300 font-semibold"
+          className="w-full py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-600 transition duration-300 font-semibold"
         >
           Sign in with Google
         </button>
