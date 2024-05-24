@@ -1,4 +1,5 @@
 // components/LandingPage.tsx
+import { signIn } from 'next-auth/react';
 import React from 'react';
 
 const LandingPage: React.FC = () => {

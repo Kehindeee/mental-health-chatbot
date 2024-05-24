@@ -26,5 +26,5 @@ export default NextAuth({
       return token;
     },
   },
-  debug: true, // Enable debug logging for troubleshooting
+  debug: false, // Enable debug logging for troubleshooting
 });
