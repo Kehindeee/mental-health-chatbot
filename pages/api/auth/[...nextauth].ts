@@ -13,18 +13,18 @@ export default NextAuth({
     signIn: '/auth/signin',
   },
   callbacks: {
-    async session({ session, token, user }) {
-      // Log the user object to see its structure
-      console.log('User object:', user);
-
-      // Ensure user.id is properly assigned
-      if (session.user && user && user.id) {
-        session.user.id = user.id as string;
-      } else if (session.user && token && token.sub) {
-        // If user.id is not available, try using token.sub
-        session.user.id = token.sub as string;
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.sub || ''; // Ensure id is a string
       }
       return session;
     },
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        token.id = user.id;
+      }
+      return token;
+    },
   },
+  debug: true, // Enable debug logging for troubleshooting
 });

@@ -7,12 +7,12 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-blue-600 text-white p-4">
+    <div className="flex flex-col min-h-screen bg-gray-100">
+      <header className="bg-blue-600 text-white p-4 shadow-md">
         <h1 className="text-xl font-bold">Mental Health Support</h1>
       </header>
       <main className="flex-grow p-4">{children}</main>
-      <footer className="bg-blue-600 text-white p-4 text-center">
+      <footer className="bg-blue-600 text-white p-4 text-center shadow-md">
         Footer Content
       </footer>
     </div>

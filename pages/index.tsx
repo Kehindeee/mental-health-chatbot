@@ -5,7 +5,14 @@ import Layout from '../components/Layout';
 import Chatbot from '../components/Chatbot';
 
 const Home = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  console.log('Session status:', status);
+  console.log('Session data:', session);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
 
   if (!session) {
     return (
@@ -14,7 +21,7 @@ const Home = () => {
           <h1 className="text-3xl font-bold mb-4">Welcome to Mental Health Support</h1>
           <button
             onClick={() => signIn()}
-            className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+            className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition duration-200"
           >
             Sign in to start chatting
           </button>
@@ -28,7 +35,7 @@ const Home = () => {
       <div className="flex justify-end p-4">
         <button
           onClick={() => signOut()}
-          className="p-2 bg-red-500 text-white rounded hover:bg-red-700"
+          className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition duration-200"
         >
           Sign out
         </button>
@@ -42,14 +49,15 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
+
+  console.log('Session from getServerSideProps:', session);
+
   if (!session) {
     return {
-      redirect: {
-        destination: '/auth/signin',
-        permanent: false,
-      },
+      props: { session: null },
     };
   }
+
   return {
     props: { session },
   };
