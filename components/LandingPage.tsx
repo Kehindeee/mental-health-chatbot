@@ -1,8 +1,20 @@
 // components/LandingPage.tsx
 import { signIn } from 'next-auth/react';
-import React from 'react';
+import { useState } from 'react';
+import Modal from './Modal';
+import SignupForm from './SignupForm';
 
 const LandingPage: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="bg-white py-20">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
@@ -11,14 +23,14 @@ const LandingPage: React.FC = () => {
           <p className="text-lg mb-6">Connect with our AI-powered chatbot and get the support you need, anytime.</p>
           <div className="flex">
             <button
-              className="p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition duration-200 mr-2"
+              className="p-3 bg-blue-700 text-white rounded-lg hover:bg-blue-500 transition duration-200 mr-2"
               onClick={() => alert('Chatbot will be implemented')}
             >
               Try the Chatbot
             </button>
             <button
-              className="p-3 bg-white text-blue-500 border border-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition duration-200"
-              onClick={() => signIn()}
+              className="p-3 bg-white text-blue-700 border border-blue-700 rounded-lg hover:bg-blue-700 hover:text-white transition duration-200"
+              onClick={handleOpenModal}
             >
               Sign In
             </button>
@@ -31,6 +43,10 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <SignupForm onClose={handleCloseModal} />
+      </Modal>
     </div>
   );
 };

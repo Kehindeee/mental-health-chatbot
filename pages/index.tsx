@@ -5,6 +5,8 @@ import Layout from '../components/Layout';
 import LandingPage from '../components/LandingPage';
 import DetailsSection from '../components/DetailsSection';
 import Chatbot from '../components/Chatbot';
+import UserDetailsSection from '../components/UserDetailsSection';
+// import Header from '@/components/Header';
 
 const Home = () => {
   const { data: session, status } = useSession();
@@ -16,8 +18,9 @@ const Home = () => {
   if (!session) {
     return (
       <Layout>
+        {/* <Header /> */}
         <LandingPage />
-        <DetailsSection />
+        <DetailsSection /> {/* General page details section */}
       </Layout>
     );
   }
@@ -32,7 +35,14 @@ const Home = () => {
           Sign out
         </button>
       </div>
-      <Chatbot />
+      <div className="flex justify-between">
+        <div className="w-1/2 p-4">
+          <Chatbot />
+        </div>
+        <div className="w-1/2 p-4">
+          <UserDetailsSection /> {/* Signed-in user's details section */}
+        </div>
+      </div>
     </Layout>
   );
 };
