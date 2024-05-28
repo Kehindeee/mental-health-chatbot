@@ -4,14 +4,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 const Chatbot: React.FC = () => {
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<{ sender: string, content: string }[]>([]);
   const [input, setInput] = useState('');
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (input.trim() === '') return;
 
-    setMessages([...messages, input]);
+    const userMessage = { sender: 'user', content: input };
+    setMessages([...messages, userMessage]);
     setInput('');
+
+    // Send message to OpenAI API
+    const response = await fetch('/api/openai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: input }),
+    });
+
+    const data = await response.json();
+    const botMessage = { sender: 'bot', content: data.response };
+
+    setMessages((prevMessages) => [...prevMessages, botMessage]);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,8 +40,10 @@ const Chatbot: React.FC = () => {
       </header>
       <div className="flex-grow p-4 overflow-y-auto">
         {messages.map((msg, index) => (
-          <div key={index} className="flex items-center my-2">
-            <div className="bg-gray-200 p-2 rounded-lg">{msg}</div>
+          <div key={index} className={`flex items-center my-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+            <div className={`p-2 rounded-lg ${msg.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+              {msg.content}
+            </div>
           </div>
         ))}
       </div>
