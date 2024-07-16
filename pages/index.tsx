@@ -1,4 +1,4 @@
-// pages/index.tsx
+
 import { useSession, signIn, signOut, getSession } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
 import Layout from '../components/Layout';

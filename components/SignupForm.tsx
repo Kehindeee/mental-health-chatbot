@@ -1,4 +1,4 @@
-// components/SignupForm.tsx
+
 import { signIn } from 'next-auth/react';
 import { FaTimes } from 'react-icons/fa';
 

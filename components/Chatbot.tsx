@@ -1,4 +1,4 @@
-// components/Chatbot.tsx
+
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -41,7 +41,7 @@ const Chatbot: React.FC = () => {
       <div className="flex-grow p-4 overflow-y-auto">
         {messages.map((msg, index) => (
           <div key={index} className={`flex items-center my-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`p-2 rounded-lg ${msg.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+            <div className={`p-2 rounded-lg ${msg.sender === 'user' ? 'bg-blue-800 text-white' : 'bg-gray-200'}`}>
               {msg.content}
             </div>
           </div>

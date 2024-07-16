@@ -1,4 +1,3 @@
-// components/UserDetailsSection.tsx
 import React from 'react';
 
 const UserDetailsSection: React.FC = () => {

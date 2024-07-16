@@ -1,4 +1,4 @@
-// components/Header.tsx
+
 import React from 'react';
 import Image from 'next/image';
 import logo from '../public/logo.svg'; 

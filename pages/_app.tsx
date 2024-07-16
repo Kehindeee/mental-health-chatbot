@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app';
 import '../app/globals.css';
 import Head from 'next/head';
 
-config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
+config.autoAddCss = false; 
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps & { pageProps: { session: any } }) {
   return (
